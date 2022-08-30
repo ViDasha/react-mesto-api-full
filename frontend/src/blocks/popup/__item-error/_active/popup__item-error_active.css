@@ -1,0 +1,7 @@
+.popup__item-error_active {
+  max-width: 320px;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  color: red;
+}

@@ -1,0 +1,6 @@
+.element__area-like {
+  padding-right: 3pt;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

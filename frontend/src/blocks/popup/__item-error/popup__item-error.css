@@ -1,0 +1,13 @@
+.popup__item-error {
+  min-width: 164px;
+  max-width: 320px;
+  min-height: 29px;
+  margin-top: 5px;
+  color: red;
+}
+
+@media screen and (max-width: 680px) {
+  .popup__item-error {
+    width: 230px;
+  }
+}

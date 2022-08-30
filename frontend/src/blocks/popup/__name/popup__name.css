@@ -1,0 +1,22 @@
+.popup__name {
+  max-width: 700px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 960px) {
+  .popup__name {
+    max-width: 500px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .popup__name {
+    max-width: 240px;
+  }
+}

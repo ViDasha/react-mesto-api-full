@@ -82,9 +82,9 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',
+  baseUrl: 'https://api.vinodarya.mesto.nomoredomains.sbs',
   headers: {
-    authorization: 'bf5f1893-17e0-49e0-bcb2-32090faea63d',
+    authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
   }
 });

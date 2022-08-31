@@ -3,8 +3,6 @@ const allowedCors = [
   'http://localhost:3000',
   'http://vinodarya.mesto.nomoredomains.sbs',
   'https://vinodarya.mesto.nomoredomains.sbs',
-  'http://www.vinodarya.mesto.nomoredomains.sbs',
-  'https://www.vinodarya.mesto.nomoredomains.sbs',
   'https://localhost:3000',
 ];
 

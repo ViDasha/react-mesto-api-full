@@ -39,7 +39,7 @@ class App extends React.Component {
 
   componentDidMount() {
     const jwt = localStorage.getItem('jwt');
-    
+
     if (jwt) {
       Promise.all([api.getUserProfile(jwt), api.getInitialCards(jwt)])
       .then(([currentUser, cards]) => {
@@ -52,10 +52,9 @@ class App extends React.Component {
       // тут ловим ошибку
         console.log(err); // выведем ошибку в консоль
       });
-    }
-
   // позже здесь тоже нужно будет проверить токен пользователя!
     this.handleTokenCheck();
+    }
   }
 
   handleOnLogin = (password, email) => {
@@ -70,6 +69,18 @@ class App extends React.Component {
           }
         });
       this.props.history.push("/");
+
+      Promise.all([api.getUserProfile(data.token), api.getInitialCards(data.token)])
+      .then(([currentUser, cards]) => {
+        this.setState({
+          currentUser: currentUser,
+          cards: cards
+        })
+      })
+      .catch(err => {
+      // тут ловим ошибку
+        console.log(err); // выведем ошибку в консоль
+      });
     })
     .catch((err) => {
       switch (err){

@@ -25,7 +25,7 @@ class Card extends React.Component {
   render() {
     const { card } = this.props;
     // Определяем, являемся ли мы владельцем текущей карточки
-    const isOwn = card.owner._id === this.context._id;
+    const isOwn = card.owner === this.context._id;
 
     // Создаём переменную, которую после зададим в `className` для кнопки удаления
     const cardDeleteButtonClassName = (
@@ -33,7 +33,7 @@ class Card extends React.Component {
     );
 
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-    const isLiked = card.likes.some(i => i._id === this.context._id);
+    const isLiked = card.likes.some(i => i === this.context._id);
 
     // Создаём переменную, которую после зададим в `className` для кнопки лайка
     const cardLikeButtonClassName = (

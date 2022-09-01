@@ -38,7 +38,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    Promise.all([api.getUserProfile(), api.getInitialCards()])
+    const jwt = localStorage.getItem('jwt');
+    Promise.all([api.getUserProfile(jwt), api.getInitialCards(jwt)])
     .then(([currentUser, cards]) => {
       this.setState({
         currentUser: currentUser,
@@ -167,8 +168,9 @@ class App extends React.Component {
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
     const isLiked = card.likes.some(i => i === this.state.currentUser._id);
 
+    const jwt = localStorage.getItem('jwt');
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeCardLike(card._id, isLiked)
+    api.changeCardLike(card._id, isLiked, jwt)
       .then((newCard) => {
         setCards(newCard);
       })
@@ -182,7 +184,8 @@ class App extends React.Component {
       this.setState({ cards: this.state.cards.filter((c) => c._id !== card._id)});
     }
 
-    api.deleteCard(card._id)
+    const jwt = localStorage.getItem('jwt');
+    api.deleteCard(card._id, jwt)
       .then(() => {
         updateCards();
       })
@@ -226,7 +229,8 @@ class App extends React.Component {
   }
 
   handleUpdateUser = (inputValues) => {
-    api.patchUserInfo(inputValues)
+    const jwt = localStorage.getItem('jwt');
+    api.patchUserInfo(inputValues, jwt)
     .then((userInfo) => {
       this.setState({
         currentUser: userInfo
@@ -239,7 +243,8 @@ class App extends React.Component {
   }
 
   handleUpdateAvatar = (inputValues) => {
-    api.patchUserAvatar(inputValues.avatar)
+    const jwt = localStorage.getItem('jwt');
+    api.patchUserAvatar(inputValues.avatar, jwt)
     .then((userInfo) => {
       this.setState({
         currentUser: userInfo
@@ -252,7 +257,8 @@ class App extends React.Component {
   }
 
   handleAddPlaceSubmit = (inputValues) => {
-    api.postNewCard(inputValues)
+    const jwt = localStorage.getItem('jwt');
+    api.postNewCard(inputValues, jwt)
     .then((newCard) => {
       this.setState({
         cards: [newCard, ...this.state.cards]

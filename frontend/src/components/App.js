@@ -39,17 +39,20 @@ class App extends React.Component {
 
   componentDidMount() {
     const jwt = localStorage.getItem('jwt');
-    Promise.all([api.getUserProfile(jwt), api.getInitialCards(jwt)])
-    .then(([currentUser, cards]) => {
-      this.setState({
-        currentUser: currentUser,
-        cards: cards
+    
+    if (jwt) {
+      Promise.all([api.getUserProfile(jwt), api.getInitialCards(jwt)])
+      .then(([currentUser, cards]) => {
+        this.setState({
+          currentUser: currentUser,
+          cards: cards
+        })
       })
-    })
-    .catch(err => {
-    // тут ловим ошибку
-      console.log(err); // выведем ошибку в консоль
-    });
+      .catch(err => {
+      // тут ловим ошибку
+        console.log(err); // выведем ошибку в консоль
+      });
+    }
 
   // позже здесь тоже нужно будет проверить токен пользователя!
     this.handleTokenCheck();

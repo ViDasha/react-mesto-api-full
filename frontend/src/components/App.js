@@ -165,7 +165,7 @@ class App extends React.Component {
     };
 
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-    const isLiked = card.likes.some(i => i._id === this.state.currentUser._id);
+    const isLiked = card.likes.some(i => i === this.state.currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeCardLike(card._id, isLiked)

@@ -83,7 +83,7 @@ module.exports.updateProfile = (req, res, next) => {
   )
     .then((user) => {
       if (!user) {
-        next(new NotFoundError('Пользователь по указанному _id не найден'));
+        return next(new NotFoundError('Пользователь по указанному _id не найден'));
       }
       res.send(user);
     })
@@ -99,7 +99,7 @@ module.exports.updateAvatar = (req, res, next) => {
   )
     .then((user) => {
       if (!user) {
-        next(new NotFoundError('Пользователь по указанному _id не найден'));
+        return next(new NotFoundError('Пользователь по указанному _id не найден'));
       }
       res.send(user);
     })
@@ -111,6 +111,10 @@ module.exports.login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
+      // ошибка аутентификации
+      if (!user) {
+        return next(new UnauthorizedError(err.message));
+      }
       // аутентификация успешна! пользователь в переменной user
       const token = jwt.sign(
         { _id: user._id },
@@ -121,8 +125,5 @@ module.exports.login = (req, res, next) => {
       // вернём токен
       res.send({ token });
     })
-    .catch((err) => {
-      // ошибка аутентификации
-      next(new UnauthorizedError(err.message));
-    });
+    .catch((err) => next(err));
 };
